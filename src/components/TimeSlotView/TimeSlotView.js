@@ -13,6 +13,7 @@ const TimeSlotView = ({timeslots,company,HandleTimeSlotClickCallBack}) => {
                 <TimeSlot 
                  timeslot={timeslot}
                  company={company}
+                 key={timeslot[2].start_time}
                 HandleTimeSlotClickCallBack={HandleTimeSlotClickCallBack}
                 />
                 )

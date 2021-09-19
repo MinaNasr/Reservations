@@ -15,11 +15,18 @@ export const TimeSlotContainer = styled.div`
     cursor: pointer;
 
     ${({disabled})=>(
-        disabled === true ? `
-        cursor:not-allowed;
-        pointer-events:none;
+        disabled ? `
         background-color:rgb(180, 180, 180);
         `:`
+        `
+    )}
+
+    ${({reservation}) => (
+        reservation ? `
+            pointer-events:none;
+            cursor:none
+        `:`
+        
         `
     )}
 `

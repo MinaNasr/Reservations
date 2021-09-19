@@ -5,7 +5,8 @@ import utils from '../../utils'
 import { 
     CompanyContainer,
     CompanyNameSection,
-    Container
+    Container,
+    SlotsContainer
 } from './Company.style';
 export const companyContext = createContext();
 
@@ -22,9 +23,9 @@ const Company = ({company, reservedTimeSlots,HandleTimeSlotClickCallBack}) => {
                 </CompanyContainer>
                 <CompanyContainer>
                     {/* hello */}
-                    <Reservation company={company} reservedTimeSlots={reservedTimeSlots[company.name]}></Reservation>
+                    <Reservation company={company} reservedTimeSlots={Object.keys(reservedTimeSlots).length ? reservedTimeSlots[company.name] : []}></Reservation>
                 </CompanyContainer>
-                <CompanyContainer>
+                <SlotsContainer>
                     {
                         Object.keys(timeSlotsObject).map(key=>{
                             return <TimeSlotsContainer 
@@ -37,7 +38,7 @@ const Company = ({company, reservedTimeSlots,HandleTimeSlotClickCallBack}) => {
                         })
                     }
                     
-                </CompanyContainer>
+                </SlotsContainer>
                 </Container>
             </companyContext.Provider>
          );

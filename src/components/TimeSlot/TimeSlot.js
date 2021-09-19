@@ -16,27 +16,39 @@ class TimeSlot extends Component {
 
 
     handleTimeSlotClick(e){
-        this.setState({disabled: true});
-        console.log('timeslot: ',this.props.timeslot)
-        console.log('company: ', this.props.company)
-        const data = {
-            company: this.props.company,
-            timeslot: this.props.timeslot
+            const data = {
+                company: this.props.company,
+                timeslot: this.props.timeslot,
+                action:''
+            }
+            if(!this.state.disabled){
+                this.setState({disabled: true});
+                data['action'] = 'add';
+                this.props.HandleTimeSlotClickCallBack(data);
+            }else{
+                this.setState({disabled: false});
+                data['action'] = 'remove'
+                this.props.HandleTimeSlotClickCallBack(data)
+            }
+
+            // this.setState({disabled: !this.state.disabled});
+            // const data = {
+            //     company: this.props.company,
+            //     timeslot: this.props.timeslot
+            // }
+            // this.props.HandleTimeSlotClickCallBack(data)
         }
-        this.props.HandleTimeSlotClickCallBack(data)
-    }
   
   
     render() {
-        const {timeslot,company} = this.props;
+        const {timeslot, reservation} = this.props;
         return ( 
             <companyContext.Consumer>
                 {
                     (props) => {
                         return(
-                            <TimeSlotContainer onClick={this.handleTimeSlotClick} disabled={this.state.disabled} key={Math.random()}>
-                                {timeslot[0]} - 
-                                {timeslot[1]} -
+                            <TimeSlotContainer onClick={this.handleTimeSlotClick} reservation={reservation} disabled={this.state.disabled} key={Math.random()}>
+                                {timeslot[0]} - {timeslot[1]}
                             </TimeSlotContainer>
                         )
                     }

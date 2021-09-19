@@ -8,11 +8,7 @@ class Container extends Component {
         super(props);
         this.state = { 
             companies: [],
-            reservations:{
-                'Company 1':[],
-                'Company 2':[],
-                'Company 3':[],
-            },
+            reservations:{},
         }
         this.HandleTimeSlotClickCallBack = this.HandleTimeSlotClickCallBack.bind(this);
     }
@@ -24,6 +20,14 @@ class Container extends Component {
         .then(res=>{
             console.log('res',res);
             this.setState({companies: res});
+            let obj = {}
+            for(let i = 0 ; i < res.length ; i++){
+                obj[res[i].name] = [];
+            }
+            console.log('sdasdsd', obj)
+            this.setState({
+                reservations:obj
+            })
         })
     }
 
@@ -32,7 +36,14 @@ class Container extends Component {
         let obj = Object.assign({},this.state.reservations);
         for(var key in obj){
             if(key === data.company.name){
-                obj[key].push(data.timeslot);
+                if(data['action'] === 'add'){
+                    obj[key].push(data.timeslot);
+                }else{
+                    let index = obj[key].findIndex(x=>{
+                        return x[0] === data.timeslot[0];
+                    })
+                    obj[key].splice(index, 1);
+                }
             }
         }
         console.log('objeect: ', obj)

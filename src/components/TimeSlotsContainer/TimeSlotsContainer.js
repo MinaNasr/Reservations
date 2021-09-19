@@ -1,10 +1,10 @@
 
 import TimeSlotView from "../TimeSlotView/TimeSlotView";
-import { Container } from './TimeSlotsContainer.style';
+import { Container,Date } from './TimeSlotsContainer.style';
 const TimeSlotsContainer = ({timeslots, date, company, HandleTimeSlotClickCallBack}) => {
     return ( 
         <Container>
-            <h2>{date}</h2>
+            <Date>{date}</Date>
             <TimeSlotView  
              timeslots={timeslots}
              company={company}
